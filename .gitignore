@@ -29,8 +29,16 @@ proguard/
 # Gradle generated
 .gradle
 /local.properties
+.idea/
 /.idea/workspace.xml
 /.idea/libraries
 .DS_Store
 /build
 /captures
+
+# Windows shortcuts
+*.lnk
+
+# Ignore Gradle GUI config
+gradle-app.setting
+*.iml

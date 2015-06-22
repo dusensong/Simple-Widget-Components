@@ -13,6 +13,9 @@ import java.lang.reflect.Method;
 
 public class CheckedImageView extends ImageView implements Checkable {
     private boolean mChecked;
+    private boolean mBroadcasting;
+
+    private OnCheckedChangeListener mOnCheckedChangeListener;
 
     private static final int[] CHECKED_STATE_SET = {
             android.R.attr.state_checked
@@ -58,7 +61,27 @@ public class CheckedImageView extends ImageView implements Checkable {
             refreshDrawableState();
             notifyViewAccessibilityStateChangedIfNeeded(
                     AccessibilityEvent.CONTENT_CHANGE_TYPE_UNDEFINED);
+
+            // Avoid infinite recursions if setChecked() is called from a listener
+            if (mBroadcasting) {
+                return;
+            }
+
+            mBroadcasting = true;
+            if (mOnCheckedChangeListener != null) {
+                mOnCheckedChangeListener.onCheckedChanged(this, mChecked);
+            }
+
+            mBroadcasting = false;
         }
+    }
+
+    public void setOnCheckedChangeListener(OnCheckedChangeListener listener) {
+        mOnCheckedChangeListener = listener;
+    }
+
+    public static interface OnCheckedChangeListener {
+        void onCheckedChanged(CheckedImageView buttonView, boolean isChecked);
     }
 
     @Override

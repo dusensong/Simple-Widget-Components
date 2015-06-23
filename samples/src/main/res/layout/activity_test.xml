@@ -10,6 +10,7 @@
         android:layout_alignParentStart="true"
         android:src="@drawable/check_image"
         android:scaleType="center"
+        android:contentDescription="Check"
         custom:checked="true" />
 
 </RelativeLayout>

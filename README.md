@@ -1,3 +1,3 @@
-# Simple-Widget-Components
-CheckedImageView
+# CheckedImageView
+仿照CheckedTextView控件实现的CheckedImageView，在某些场景中使用将十分方便。
 
